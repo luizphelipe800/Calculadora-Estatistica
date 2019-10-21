@@ -1,20 +1,23 @@
 import math
 import numpy as np
 
-dados = [1,1,1,2,2,1,1,2,2,5,5,5,4,4,4,4,3,3,3,3,6,6,6,8,100,200,102,104]
-num_classes = round((1 + 3.322) * math.log(len(dados), 10))
-intervalo = round((max(dados)-min(dados))/num_classes)
+dados = []
 
 def gerador_classes(dados):
     tabela_de_classes = dict()
     frequencia_acumulada = 0
+    num_classes = math.floor((1 + 3.322) * math.log(len(dados), 10)) - 3
+    intervalo = round((max(dados) - min(dados)) / num_classes)
 
     for x in range(num_classes):
         x1 = min(dados)+ x + intervalo * x
         x2 = min(dados)+ x + intervalo * (x+1)
         frequencia = list(filter((lambda d: d >= x1 and d <= x2), dados))
         frequencia_acumulada += len(frequencia)
-        tabela_de_classes[x] = [[x1, x2], frequencia, frequencia_acumulada]
+        media_classe = round((x1+x2)/2)
+        freq_media = media_classe * len(frequencia)
+        freq_media_quadrada = int(math.pow(media_classe, 2) * len(frequencia))
+        tabela_de_classes[x] = [[x1, x2], frequencia, frequencia_acumulada, media_classe, freq_media, freq_media_quadrada]
 
     return tabela_de_classes
 
@@ -96,13 +99,38 @@ def calcular_moda(dados_prontos):
 
     return [classes[1][0], moda]
 
+def calcular_desvio_padrao(variancia):
+    return math.sqrt(variancia)
 
-dados_prontos = gerador_classes(dados)
-media = calcular_media(dados_prontos)
-mediana = calcular_mediana(dados_prontos)
-moda = calcular_moda(dados_prontos)
+def calcular_variancia(dados_prontos, media):
+    soma_variancia = 0
+    freq_total = len(dados)
+    for k in dados_prontos:
+        soma_variancia += len(dados_prontos[k][1])*math.pow((dados_prontos[k][3]-media), 2)
 
-for k in dados_prontos:
-   print(f'{dados_prontos[k][0]} | {len(dados_prontos[k][1])} | {dados_prontos[k][2]}')
+    return soma_variancia / freq_total
 
-print(f'media: {media}\nmediana: {mediana}\nmoda: {moda}')
+def main():
+    while(True):
+        entrada = input('n para sair: ')
+        if(entrada == 'n'):
+            break
+
+        for n in entrada.split(','):
+            dados.append(int(n))
+
+
+    dados_prontos = gerador_classes(dados)
+    media = calcular_media(dados_prontos)
+    mediana = calcular_mediana(dados_prontos)
+    moda = calcular_moda(dados_prontos)
+    variancia = calcular_variancia(dados_prontos, media)
+    desvio = calcular_desvio_padrao(variancia)
+
+    for k in dados_prontos:
+       print(f'{dados_prontos[k][0][0]} - {dados_prontos[k][0][1]} | {len(dados_prontos[k][1])} | {dados_prontos[k][2]}')
+
+    print(f'media: {media}\nmediana: {mediana}\nmoda: {moda}')
+    print(f'desvio padrão: {desvio} | variancia: {variancia}')
+
+main()
