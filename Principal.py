@@ -110,9 +110,12 @@ def calcular_variancia(dados_prontos, media):
 
     return soma_variancia / freq_total
 
+def imprimir_classe(classe):
+    return f'{classe[0]} - {classe[1]}'
+
 def main():
     while(True):
-        entrada = input('n para sair: ')
+        entrada = input('Entre com os valores, separando-os por virgula\n pressione (Enter) | pressione (n) + (Enter) para calcular\n: ')
         if(entrada == 'n'):
             break
 
@@ -130,7 +133,7 @@ def main():
     for k in dados_prontos:
        print(f'{dados_prontos[k][0][0]} - {dados_prontos[k][0][1]} | {len(dados_prontos[k][1])} | {dados_prontos[k][2]}')
 
-    print(f'media: {media}\nmediana: {mediana}\nmoda: {moda}')
-    print(f'desvio padrão: {desvio} | variancia: {variancia}')
+    print(f'media: {media}\nmediana: {imprimir_classe(mediana[0])} | {round(mediana[1])}\nmoda: {imprimir_classe(moda[0])} | {round(moda[1])}')
+    print(f'desvio padrão: {round(desvio, 2)} | variancia: {round(variancia, 2)}')
 
 main()
