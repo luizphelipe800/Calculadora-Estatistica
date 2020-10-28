@@ -1,10 +1,23 @@
-# Ferramenta-Estatistica-Python
-ferramenta para calculo de medidas centras e dispersão para dados agrupados em classe
+# Caluladora de medidas centrais e dispersão para dados agrupados em classe
 
-<h3>Passo a Passo para executar</h3>
+## Trabalho Avaliativo - Fatec Dom Paulo Evaristo Arns
 
-<p>1 - Dentro do console(prompt de comando), navegue até o diretório do código</p>
-<p>2 - utilize o seguinte comando:</p>
-  <code>pip install -r requirements.txt</code>
-<p>3 - por fim executar o comando:</p>
+ferramenta para calculo de medidas centrais e dispersão para dados agrupados em classe, onde o usuario pode inserir os dados e
+
+<h3>Oque Preciso?</h3>
+<ul>
+  <li>Python</li>
+  <li>Pip</li>
+</ul>
+
+<h3>Como Executar?</h3>
+
+<ul>
+  <li>Dentro do console(prompt de comando), navegue até o diretório do código</li>
+  <li>
+    <code>pip install -r requirements.txt</code>
+  </li>
+  <li>
 <code>python Principal.py</code> ou <code>python3 Principal.py</code>
+  </li>
+</ul>
